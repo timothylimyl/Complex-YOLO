@@ -12,7 +12,7 @@ The Complex-YOLO algorithm only uses Lidar point cloud data to make 3D Object De
 
 The main challenge for Complex-YOLO is that if only 2D bounding box regression is used, there is not enough information to estimate 3D bounding boxes as we are lacking the information regarding the pose of the object. Thus, the Euler Region Proposal Network (E-RPN) is proposed to estimate the pose of the object by adding an imaginary and a real fraction to the regression network. 
 
-(Missing Research) - The angle regression will then have a closed mathematical space without singularities allows robust angle predictions.
+(Missing Research part ) - The angle regression will then have a closed mathematical space without singularities allows robust angle predictions. Why+How? Why can't we just put angle value in straight away?  - to be investigated.
 
 
 Figure below shows the summary of steps taken by the Complex-YOLO algorithm.
@@ -23,12 +23,7 @@ Figure below shows the summary of steps taken by the Complex-YOLO algorithm.
 
 In the first step, Complex-YOLO converts the point cloud lidar data into a bird-eye view RGB map by encoding the RGB-map with height,intensity and density. This was done by projecting and discretising 3D point cloud data into a 2D grid of size 1024 x 512. The point cloud data used are constrained within an area of 80m x 40m. Thus, the resolution of the grid was about 8cm to get the desirable grid size. 
 
-Each grid cell is encoded for its height, intensity, and density based on the number of points contained in it. The encoding is done by taking the maximum height of the point cloud, the maximum intensity and the normalised density of all points in the grid cell.
-
-% In github, explain through lines
-
-% refer to kitti_bev_utils.py, line26 - makeBVFeature  and config.py to see the area configuration.  kitti_yolo_dataset.py is used to preprocess the data which is called in the main (train.py) -line82 __getitem__ shows  is how the data from kitti is processed before training (it calls makeBVfeature)
-
+Each grid cell is encoded for its height, intensity, and density based on the number of points contained in it. The encoding is done by taking the maximum height of the point cloud, the maximum intensity and the normalised density of all points in the grid cell. In the main training script `train.py, line53`, we create a custom dataset `KittiYOLODataset` taken from `utils/kitti_yolo_dataset.py` for proprocessing step of Complex-YOLO. In `kitti_yolo_dataset.py,line82`, it shows how the data is being process and extracted into a 2D bird-eye view map before feeding it into the 2D Object Detection network. Refer to `utils/kitti_bev_utils.py,line8,line26` function `removePoints` and `makeBVFeature` in code to see the preprocessing step that was taken. 
 
 In the next step, Complex-YOLO can then use YOLOv2 to predict 2D bounding boxes on the bird-eye view RGB-map that was produced. It is worth noting that YOLOv2 can be interchangeable with any 2D detectors. 
 
@@ -60,7 +55,7 @@ After all of the parameters are calculated, the 2D Bounding Box prediction on th
 
 # Extra Test/Insight
 
-Point Cloud data can be very sparse + Complex-YOLO takes everything from the bird eye view and just push to the ground. Thus, we can guess that it will do very poorly with objects such as Pedestrian and Cyclist once we increase the IoU:
+Complex-YOLO makes prediction using bird eye view and predefined heights of objects. Thus, it will do very poorly with objects such as Pedestrian and Cyclist once we increase the IoU. This is also cause by the sparsity of lidar point cloud on these objects.:
 
 mAP (0.75 IoU):
 
@@ -69,7 +64,7 @@ mAP (0.75 IoU):
 | Complex-YOLO-v3         | 91.66   |    9.0     |  24.37  |  41.7   |
 
 
-Besides that, I added a COCO style object detection metric as it is a good indication of performance:
+Besides that, I added a COCO style object detection metric as it is a good indication of performance (added to `eval_mAP.py,line82`):
 
 COCO (IOU [.50: .05: .95]):
 
@@ -78,4 +73,4 @@ COCO (IOU [.50: .05: .95]):
 | Complex-YOLO-v3         |70.92    | 31.67      | 42.48   | 48.35   |
 
 
-I plan to get a few different object detection algorithms and test the difference using the COCO Metric. I believe that algorithms that is more robust, the performance will not degrade badly when a more stringent metric is used.
+I believe that for algorithms that is more robust, the performance will not degrade so badly when a more stringent metric is used.

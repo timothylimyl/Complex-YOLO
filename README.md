@@ -55,9 +55,16 @@ After all of the parameters are calculated, the 2D Bounding Box prediction on th
 
 # Extra Test/Insight
 
-Complex-YOLO makes prediction using bird eye view and predefined heights of objects. This is one of the key weakness of the algorithm, it uses a pre-defined object height which makes the results very poor when you increase the IoU metric as objects of the same category usually differ in height. Thus, it will do very poorly with objects such as Pedestrian and Cyclist once we increase the IoU. This is also cause by the sparsity of lidar point cloud on these objects.:
+Complex-YOLO makes prediction using bird eye view and predefined heights of objects. This is one of the key weakness of the algorithm, it uses a pre-defined object height which makes the results very poor when you increase the IoU metric as objects of the same category usually differ in height. Thus, it will do very poorly with objects such as Pedestrian and Cyclist once we increase the IoU. This is also cause by the sparsity of lidar point cloud on these objects coupled with the fact we are preprocessing the point cloud in a 2D grid. 
 
-mAP (0.75 IoU):
+mAP using IoU of 0.5:
+
+| Model/Class             | Car     | Pedestrian | Cyclist | Average |
+| ----------------------- |:--------|:-----------|:--------|:--------|
+| Complex-YOLO-v3         | 97.89   |82.71       |90.12    |90.24    |
+
+
+In comparison to mAP using IoU of 0.7:
 
 | Model/Class             | Car     | Pedestrian | Cyclist | Average |
 | ----------------------- |:--------|:-----------|:--------|:--------|
@@ -74,3 +81,4 @@ COCO (IOU [.50: .05: .95]):
 
 
 I believe that for algorithms that is more robust, the performance will not degrade so badly when a more stringent metric is used.
+

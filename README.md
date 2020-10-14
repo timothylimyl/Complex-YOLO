@@ -64,7 +64,7 @@ mAP using IoU of 0.5:
 | Complex-YOLO-v3         | 97.89   |82.71       |90.12    |90.24    |
 
 
-In comparison to mAP using IoU of 0.7:
+In comparison to mAP using IoU of 0.75:
 
 | Model/Class             | Car     | Pedestrian | Cyclist | Average |
 | ----------------------- |:--------|:-----------|:--------|:--------|

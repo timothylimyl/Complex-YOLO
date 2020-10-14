@@ -17,7 +17,7 @@ The main challenge for Complex-YOLO is that if only 2D bounding box regression i
 
 Figure below shows the summary of steps taken by the Complex-YOLO algorithm.
 
-![image](images/complexyolo)
+![image](images/complexyolo.PNG)
 
 
 
@@ -32,7 +32,7 @@ Each grid cell is encoded for its height, intensity, and density based on the nu
 
 In the next step, Complex-YOLO can then use YOLOv2 to predict 2D bounding boxes on the bird-eye view RGB-map that was produced. It is worth noting that YOLOv2 can be interchangeable with any 2D detectors. 
 
-![image](images/pipeline)
+![image](images/pipeline.PNG)
 
 
 The figure above is a simple illustration of the Complex-YOLO pipeline, the final grid comes up to a size of 16 x 32 after running the YOLO network on the RGB-map. On each grid cell, YOLO makes 5 bounding box predictions per cell. 
@@ -42,7 +42,7 @@ Each bounding box prediction consist of 15 regression parameters. One of the par
 4 parameters is used to find the dimension of bounding box which are $t_{x}$ , $t_{y}$ , $t_{w}$ and ($t_{l}$). 2 parameters are the real and imaginary parts of the angle of bounding box ($t_{Im}$, $t_{Re}$).  The last 5 parameters are $\alpha$,$c_{x}$,$c_{y}$,$p_{w}$,$p_{l}$ which are necessary for the E-RPN approach. E-RPN calculates the proper orientation angle ($b_{\phi}$) by modifying the Grid-RPN equation by adding a complex angle $\text{arg}(|z|e^{ib_{\sigma}})$:
 
 
-![image](images/equation)
+![image](images/equation.JPG)
 
 $b_{l}$ is the length of the box, $b_{w}$ is the width of the box, $b_{x}$ is the x-coordinate of the box and $b_{y}$ is the y-coordinate of the box. 
 
@@ -51,7 +51,7 @@ Missing: How does RPN work? -missing explanation on how does complex angle avoid
 
 Figure below illustrates the regression parameters of the E-RPN approach. 
 
-![image](images/complexyolo_params)
+![image](images/complexyolo_param.png)
 
 
 After all of the parameters are calculated, the 2D Bounding Box prediction on the RGB-map is converted to 3D by using a predefined height based on each object class. This is one of the key weakness of the algorithm, it uses a pre-defined object height which makes the results very poor when you increase the IoU metric as objects of the same category usually differ in height.

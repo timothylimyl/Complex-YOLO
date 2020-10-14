@@ -39,12 +39,12 @@ The figure above is a simple illustration of the Complex-YOLO pipeline, the fina
 
 Each bounding box prediction consist of 15 regression parameters. One of the parameter is the objectness probability, 3 parameters are class probabilities assuming we only want to detect 3 classes (Cars, Pedestrians,Cyclists).
 
-4 parameters is used to find the dimension of bounding box which are $t_{x}$ , $t_{y}$ , $t_{w}$ and ($t_{l}$). 2 parameters are the real and imaginary parts of the angle of bounding box ($t_{Im}$, $t_{Re}$).  The last 5 parameters are $\alpha$,$c_{x}$,$c_{y}$,$p_{w}$,$p_{l}$ which are necessary for the E-RPN approach. E-RPN calculates the proper orientation angle ($b_{\phi}$) by modifying the Grid-RPN equation by adding a complex angle $\text{arg}(|z|e^{ib_{\sigma}})$:
+4 parameters is used to find the dimension of bounding box which are <img src="https://render.githubusercontent.com/render/math?math=$t_{x} , t_{y} , t_{w}, t_{l}$">. 2 parameters are the real and imaginary parts of the angle of bounding box ($t_{Im}$, $t_{Re}$).  The last 5 parameters are <img src="https://render.githubusercontent.com/render/math?math=$\alpha, c_{x}, c_{y}, p_{w}, p_{l}$">  which are necessary for the E-RPN approach. E-RPN calculates the proper orientation angle (<img src="https://render.githubusercontent.com/render/math?math=$b_{\phi}$">)  by modifying the Grid-RPN equation by adding a complex angle <img src="https://render.githubusercontent.com/render/math?math=$\alpha, c_{x}, c_{y}, p_{w}, p_{l} \text{arg}(|z|e^{ib_{\sigma}})$">:
 
 
 ![image](images/equation.JPG)
 
-$b_{l}$ is the length of the box, $b_{w}$ is the width of the box, $b_{x}$ is the x-coordinate of the box and $b_{y}$ is the y-coordinate of the box. 
+<img src="https://render.githubusercontent.com/render/math?math=$b_{l}, b_{w}, b_{x}, b_{y}$"> are the length of the bounding box, the width of the bounding box, the x-coordinate and the y-coordinate of the bounding box respectively. 
 
 Missing: How does RPN work? -missing explanation on how does complex angle avoid singularity +  why exponential
 

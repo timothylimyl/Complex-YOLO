@@ -2,7 +2,7 @@
 
 The purpose of the repository is to gain an understanding of Complex-YOLO and try it out for myself for the purpose of my Final Year Project (FYP). The code repository was taken from [Deepak Ghimire](https://github.com/ghimiredhikura/Complex-YOLOv3). I have investigated the details of the algorithms and reported it here (and in my FYP). Some extra test was also done to gain more insights. Visualisation of Complex-YOLO inference on KITTI Dataset (12 images stitch together):
 
-<p align="center"><img src="https://github.com/timothylimyl/Complex-YOLO/blob/main/visualization/inference.gif" ></p>
+<p align="center"><img src="https://github.com/timothylimyl/Complex-YOLO/blob/main/images/inference.gif" ></p>
 
 
 # Complex-YOLO (Details)

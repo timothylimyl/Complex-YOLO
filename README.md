@@ -41,7 +41,7 @@ Each bounding box prediction consist of 15 regression parameters. One of the par
 
 <img src="https://render.githubusercontent.com/render/math?math=$b_{l}, b_{w}, b_{x}, b_{y}$"> are the length of the bounding box, the width of the bounding box, the x-coordinate and the y-coordinate of the bounding box respectively. 
 
-Missing: How does RPN work? -missing explanation on how does complex angle avoid singularity +  why exponential
+(To be investigated:  Missing explanation on how does complex angle avoid singularity +  why exponential)
 
 
 Figure below illustrates the regression parameters of the E-RPN approach. 
@@ -55,7 +55,9 @@ After all of the parameters are calculated, the 2D Bounding Box prediction on th
 
 # Extra Test/Insight
 
-Complex-YOLO makes prediction using bird eye view and predefined heights of objects. This is one of the key weakness of the algorithm, it uses a pre-defined object height which makes the results very poor when you increase the IoU metric as objects of the same category usually differ in height. Thus, it will do very poorly with objects such as Pedestrian and Cyclist once we increase the IoU. This is also cause by the sparsity of lidar point cloud on these objects coupled with the fact we are preprocessing the point cloud in a 2D grid. 
+Complex-YOLO makes prediction using bird eye view and predefined heights of objects. This is one of the key weakness of the algorithm, it uses a pre-defined object height which makes the results very poor when you increase the IoU metric as objects of the same category usually differ in height. The preprocessing step of converting the point cloud data into a 2D bird-eye view grid also causes loss of important information especially for smaller objects.
+
+Thus, it is expected that Complex-YOLO will do very poorly with objects such as Pedestrian and Cyclist once we increase the IoU. This is also cause by the sparsity of lidar point cloud on these objects.
 
 mAP using IoU of 0.5:
 

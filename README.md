@@ -51,7 +51,7 @@ After all of the parameters are calculated, the 2D Bounding Box prediction on th
 
 # Extra Test/Insight
 
-Complex-YOLO makes prediction using bird eye view and predefined heights of objects. This is one of the key weakness of the algorithm, it uses a pre-defined object height which makes the results very poor when you increase the IoU metric as objects of the same category usually differ in height. The preprocessing step of converting the point cloud data into a 2D bird-eye view grid also causes loss of important information especially for smaller objects.
+Complex-YOLO makes prediction using bird eye view and predefined heights of objects. This is one of the key weakness of the algorithm, the preprocessing step of converting the point cloud data into a 2D bird-eye view grid also causes loss of important information especially for smaller objects. It also uses a pre-defined object height which makes the results very poor when you increase the IoU metric as objects of the same category may differ in height.
 
 Thus, it is expected that Complex-YOLO will do very poorly with objects such as Pedestrian and Cyclist once we increase the IoU. This is also cause by the sparsity of lidar point cloud on these objects.
 

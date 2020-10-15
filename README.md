@@ -12,7 +12,7 @@ The Complex-YOLO algorithm only uses Lidar point cloud data to make 3D Object De
 
 The main challenge for Complex-YOLO is that if only 2D bounding box regression is used, there is not enough information to estimate 3D bounding boxes as we are lacking the information regarding the pose of the object. Thus, the Euler Region Proposal Network (E-RPN) is proposed to estimate the pose of the object by adding an imaginary and a real fraction to the regression network. 
 
-(Missing Research part ) - The angle regression will then have a closed mathematical space without singularities allows robust angle predictions. Why+How? Why can't we just put angle value in straight away?  - to be investigated.
+(To be investigated: The angle regression will then have a closed mathematical space without singularities allows robust angle predictions. Why+How? Why can't we just put angle value in straight away?)
 
 
 Figure below shows the summary of steps taken by the Complex-YOLO algorithm.
@@ -41,16 +41,12 @@ Each bounding box prediction consist of 15 regression parameters. One of the par
 
 <img src="https://render.githubusercontent.com/render/math?math=$b_{l}, b_{w}, b_{x}, b_{y}$"> are the length of the bounding box, the width of the bounding box, the x-coordinate and the y-coordinate of the bounding box respectively. 
 
-(To be investigated:  Missing explanation on how does complex angle avoid singularity +  why exponential)
-
-
 Figure below illustrates the regression parameters of the E-RPN approach. 
 
 ![image](images/complexyolo_param.png)
 
 
 After all of the parameters are calculated, the 2D Bounding Box prediction on the RGB-map is converted to 3D by using a predefined height based on each object class. 
-
 
 
 # Extra Test/Insight
